@@ -13,6 +13,8 @@
 		264DFEE5260D07EF0035EA15 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 264DFEE3260D07EF0035EA15 /* Main.storyboard */; };
 		264DFEE7260D07F00035EA15 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 264DFEE6260D07F00035EA15 /* Assets.xcassets */; };
 		264DFEEA260D07F00035EA15 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 264DFEE8260D07F00035EA15 /* LaunchScreen.storyboard */; };
+		D7ED162827AC8030003073BB /* String+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7ED162727AC8030003073BB /* String+Ext.swift */; };
+		D7ED162A27AC80F7003073BB /* BruteForceFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7ED162927AC80F7003073BB /* BruteForceFunctions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +26,8 @@
 		264DFEE6260D07F00035EA15 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		264DFEE9260D07F00035EA15 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		264DFEEB260D07F00035EA15 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D7ED162727AC8030003073BB /* String+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Ext.swift"; sourceTree = "<group>"; };
+		D7ED162927AC80F7003073BB /* BruteForceFunctions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BruteForceFunctions.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,6 +60,8 @@
 		264DFEDC260D07EF0035EA15 /* Pr2503 */ = {
 			isa = PBXGroup;
 			children = (
+				D7ED162727AC8030003073BB /* String+Ext.swift */,
+				D7ED162927AC80F7003073BB /* BruteForceFunctions.swift */,
 				264DFEDD260D07EF0035EA15 /* AppDelegate.swift */,
 				264DFEDF260D07EF0035EA15 /* SceneDelegate.swift */,
 				264DFEE1260D07EF0035EA15 /* ViewController.swift */,
@@ -139,6 +145,8 @@
 			files = (
 				264DFEE2260D07EF0035EA15 /* ViewController.swift in Sources */,
 				264DFEDE260D07EF0035EA15 /* AppDelegate.swift in Sources */,
+				D7ED162A27AC80F7003073BB /* BruteForceFunctions.swift in Sources */,
+				D7ED162827AC8030003073BB /* String+Ext.swift in Sources */,
 				264DFEE0260D07EF0035EA15 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

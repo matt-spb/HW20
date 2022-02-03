@@ -1,7 +1,49 @@
 import UIKit
 
 class ViewController: UIViewController {
+    @IBOutlet weak var textField: UITextField!
     @IBOutlet weak var button: UIButton!
+    @IBOutlet weak var generateButton: UIButton!
+    @IBOutlet weak var label: UILabel!
+    @IBOutlet weak var acivityIndIcator: UIActivityIndicatorView!
+    
+    @IBAction func generateAction(_ sender: UIButton) {
+        var password = ""
+        let passLength = Int.random(in: 3...4)
+        let availableSymbols = (password.digits + password.letters).map { String($0) }
+
+        for _ in 1...passLength {
+            let randomIndex = Int.random(in: 0..<availableSymbols.count)
+            let char = availableSymbols[randomIndex]
+            password += char
+        }
+        
+        generateButton.isUserInteractionEnabled = false
+        textField.text = password
+        unlockPassword(for: password)
+    }
+    
+    private func unlockPassword(for password: String) {
+        acivityIndIcator.isHidden = false
+        acivityIndIcator.startAnimating()
+        setDefault()
+        
+        DispatchQueue.global(qos: .userInteractive).async {
+            bruteForce(passwordToUnlock: password, completion: { result in
+                DispatchQueue.main.async {
+                    self.acivityIndIcator.stopAnimating()
+                    self.textField.isSecureTextEntry = false
+                    self.label.text = result
+                    self.generateButton.isUserInteractionEnabled = true
+                }
+            })
+        }
+    }
+    
+    private func setDefault() {
+        textField.isSecureTextEntry = true
+        label.text = "unlocking..."
+    }
     
     var isBlack: Bool = false {
         didSet {
@@ -19,73 +61,8 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        
-        self.bruteForce(passwordToUnlock: "1!gr")
-        
-        // Do any additional setup after loading the view.
+        textField.isSecureTextEntry = true
+        acivityIndIcator.isHidden = true
     }
-    
-    func bruteForce(passwordToUnlock: String) {
-        let ALLOWED_CHARACTERS:   [String] = String().printable.map { String($0) }
-
-        var password: String = ""
-
-        // Will strangely ends at 0000 instead of ~~~
-        while password != passwordToUnlock { // Increase MAXIMUM_PASSWORD_SIZE value for more
-            password = generateBruteForce(password, fromArray: ALLOWED_CHARACTERS)
-//             Your stuff here
-            print(password)
-            // Your stuff here
-        }
-        
-        print(password)
-    }
-}
-
-
-
-extension String {
-    var digits:      String { return "0123456789" }
-    var lowercase:   String { return "abcdefghijklmnopqrstuvwxyz" }
-    var uppercase:   String { return "ABCDEFGHIJKLMNOPQRSTUVWXYZ" }
-    var punctuation: String { return "!\"#$%&'()*+,-./:;<=>?@[\\]^_`{|}~" }
-    var letters:     String { return lowercase + uppercase }
-    var printable:   String { return digits + letters + punctuation }
-
-
-
-    mutating func replace(at index: Int, with character: Character) {
-        var stringArray = Array(self)
-        stringArray[index] = character
-        self = String(stringArray)
-    }
-}
-
-func indexOf(character: Character, _ array: [String]) -> Int {
-    return array.firstIndex(of: String(character))!
-}
-
-func characterAt(index: Int, _ array: [String]) -> Character {
-    return index < array.count ? Character(array[index])
-                               : Character("")
-}
-
-func generateBruteForce(_ string: String, fromArray array: [String]) -> String {
-    var str: String = string
-
-    if str.count <= 0 {
-        str.append(characterAt(index: 0, array))
-    }
-    else {
-        str.replace(at: str.count - 1,
-                    with: characterAt(index: (indexOf(character: str.last!, array) + 1) % array.count, array))
-
-        if indexOf(character: str.last!, array) == 0 {
-            str = String(generateBruteForce(String(str.dropLast()), fromArray: array)) + String(str.last!)
-        }
-    }
-
-    return str
 }
 
